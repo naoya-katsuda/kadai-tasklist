@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
-  before_action :require_user_logged_in, only: [:index, :show, :edit, :new, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :show, :create, :edit, :new, :update, :destroy]
   
   before_action :correct_user, only: [:show, :edit, :update,:destroy]
   
@@ -10,8 +10,6 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
   end
 
-  def show
-  end
 
   def new
     @task = Task.new
@@ -29,9 +27,6 @@ class TasksController < ApplicationController
       flash.now[:danger] = 'Task が作成されませんでした'
       render :new
     end 
-  end
-
-  def edit
   end
 
   def update
@@ -55,7 +50,7 @@ class TasksController < ApplicationController
   private
   
   def set_task
-    @task = Task.find(params[:id])
+    @task = Task
   end
   
   def task_params
